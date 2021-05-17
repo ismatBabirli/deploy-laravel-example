@@ -1,20 +1,34 @@
-#RUN apt-get update && apt-get install -y apt-transport-https
-ARG PHP_EXTENSIONS="apcu bcmath opcache pcntl pdo_mysql redis zip sockets imagick gd exif"
-FROM thecodingmachine/php:7.4-v3-slim-fpm as php_base
-ENV TEMPLATE_PHP_INI=production \
-    APACHE_DOCUMENT_ROOT=/var/www/html/public
-COPY --chown=docker:docker . /var/www/html
-RUN composer install --quiet --optimize-autoloader --no-dev
+FROM php:7.4-fpm
 
-FROM node:10 as node_dependencies
-WORKDIR /var/www/html
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false
-COPY --from=php_base /var/www/html /var/www/html
-RUN npm set progress=false && \
-    npm config set depth 0 && \
-    npm install && \
-    npm run prod && \
-    rm -rf node_modules
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
 
-FROM php_base
-COPY --from=node_dependencies --chown=docker:docker /var/www/html /var/www/html
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
+
+# Set working directory
+WORKDIR /var/www
+
+USER $user
