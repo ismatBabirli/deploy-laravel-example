@@ -1,4 +1,4 @@
-resource "kubernetes_deployment" "laravel-deployment" {
+resource "kubernetes_deployment" "laravel-deployment"  {
     metadata {
         name = var.APP_NAME
         namespace = "test"
