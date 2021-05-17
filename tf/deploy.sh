@@ -7,8 +7,6 @@ version="$3"
 #echo details
 echo "$namespace $appName $version"
 pwd
-whoami
-
 #copy ms infra
 # rm -rf infra
 # cp -r "/var/emas-infra/ms/${namespace}" infra
@@ -25,7 +23,7 @@ terraform init
 terraform validate .
 terraform plan -var DOCKER_IMG_TAG=$version -var APP_NAME=$appName
 
-terraform taint ms-deployment
-terraform taint ms-service
+terraform taint laravel-deployment
+terraform taint laravel-service
 
 terraform apply -var DOCKER_IMG_TAG=$version -var APP_NAME=$appName -auto-approve

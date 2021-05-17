@@ -1,4 +1,4 @@
-resource "kubernetes_service" "ms-service" {
+resource "kubernetes_service" "laravel-service" {
     metadata {
         name = var.APP_NAME
         namespace = "test"
