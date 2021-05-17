@@ -39,6 +39,7 @@ node {
 		    }
 
            stage ('deploy') {
+               sh "chmod +x tf/deploy.sh"
                sh "tf/deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
            }
         }
