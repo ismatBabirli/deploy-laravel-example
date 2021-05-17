@@ -18,7 +18,7 @@ node {
         	checkout scm
         }
         stage ('Build Project') {
-            sh './gradlew clean build -x test --no-daemon --info'
+//             sh './gradlew clean build -x test --no-daemon --info'
         }
         stage ('Unit & Integration Tests') {
 //             try {  //@todo uncomment it after there are at least one unit test
