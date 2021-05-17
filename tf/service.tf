@@ -1,7 +1,7 @@
 resource "kubernetes_service" "laravel-service" {
     metadata {
         name = var.APP_NAME
-        namespace = "test"
+        namespace = "develop"
 
         labels = {
             app = var.APP_NAME

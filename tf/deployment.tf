@@ -1,7 +1,7 @@
 resource "kubernetes_deployment" "laravel-deployment"  {
     metadata {
         name = var.APP_NAME
-        namespace = "test"
+        namespace = "develop"
 
         labels = {
             app = var.APP_NAME
@@ -17,7 +17,7 @@ resource "kubernetes_deployment" "laravel-deployment"  {
         template {
             metadata {
                 name = var.APP_NAME
-                namespace = "test"
+                namespace = "develop"
 
                 labels = {
                     app = var.APP_NAME
