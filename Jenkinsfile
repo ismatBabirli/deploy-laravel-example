@@ -39,7 +39,7 @@ node {
 		    }
 
            stage ('deploy') {
-               sh "ls -lah"
+               sh "ls"
                sh "deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
            }
         }
