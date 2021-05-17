@@ -38,9 +38,9 @@ node {
 				sh "docker rmi -f ismatbabir/$APP_NAME:${VERSION}"
 		    }
 
-//            stage ('deploy') {
-//                sh "/var/emas-infra/ms/deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
-//            }
+           stage ('deploy') {
+               sh "deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
+           }
         }
     } catch (err) {
         throw err
