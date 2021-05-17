@@ -7,6 +7,7 @@ version="$3"
 #echo details
 echo "$namespace $appName $version"
 pwd
+echo "whoami"
 
 #copy ms infra
 # rm -rf infra
