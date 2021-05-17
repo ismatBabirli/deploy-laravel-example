@@ -40,7 +40,7 @@ resource "kubernetes_deployment" "laravel-deployment"  {
                 }
 
                 image_pull_secrets {
-                    name = "ismatbabir"
+                    name = "regcred"
                 }
             }
         }
