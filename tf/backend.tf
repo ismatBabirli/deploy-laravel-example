@@ -5,6 +5,6 @@ terraform {
 }
 
 provider "kubernetes" {
-    config_path = "/root/configs/.kube/config"
+    config_path = "~/.kube/config"
     config_context = "kubernetes-admin@kubernetes"
 }
