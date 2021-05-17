@@ -27,7 +27,7 @@ node {
 //                 junit '**/build/test-results/test/*.xml'
 //             }
         }
-        if ((env.BRANCH_NAME == 'preprod' || env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master') && env.GITLAB_OBJECT_KIND == 'push')){
+        if (env.BRANCH_NAME == 'preprod' || env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master'){
             stage ('Build Image') {
 				sh "docker build -t ismatbabir/$APP_NAME:${VERSION} ."
             }
