@@ -1,6 +1,6 @@
+RUN apt-get update && apt-get install -y apt-transport-https
 ARG PHP_EXTENSIONS="apcu bcmath opcache pcntl pdo_mysql redis zip sockets imagick gd exif"
 FROM thecodingmachine/php:7.3-v2-slim-apache as php_base
-RUN apt-get update && apt-get install -y apt-transport-https
 ENV TEMPLATE_PHP_INI=production \
     APACHE_DOCUMENT_ROOT=/var/www/html/public
 COPY --chown=docker:docker . /var/www/html
