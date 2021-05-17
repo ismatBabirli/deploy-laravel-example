@@ -39,8 +39,7 @@ node {
 		    }
 
            stage ('deploy') {
-               sh "ls"
-               sh "deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
+               sh "tf/deploy.sh ${NAMESPACE} ${APP_NAME} ${VERSION}"
            }
         }
     } catch (err) {
