@@ -33,6 +33,7 @@ node {
             }
 
       	    stage ('Push&Clean Image') {
+      	        sh "docker login --username ismatbabir --password 'W%PAwJW@w6Ld.^s'"
 				sh "docker push ismatbabir/$APP_NAME:${VERSION}"
 				sh "docker rmi -f ismatbabir/$APP_NAME:${VERSION}"
 		    }
